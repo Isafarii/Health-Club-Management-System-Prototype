@@ -1,9 +1,0 @@
-Zarak,25,804cdf52-346c-4b5d-baaf-ca02137ef212,Chase,2023-12-04,de774f47-ff04-4e6e-9ecf-d77d45dcd7aa,zaraktariq@outlook.com,2023-07-04
-Ryan,21,b5a5d7c4-d4ec-45d0-a967-59232d7be1d5,BMO,2023-12-09,58cdffd1-fdfc-44ca-aa7c-b21fbabde943,ryanwal@gmail.com,2024-10-09
-Daniel,102,9269a884-29d5-4721-af8a-3f06fa05427e,Vbucks,2023-06-09,27da476b-0b59-43d6-a983-eaf59b87ac91,daniglw@gfmai.com,2026-04-09
-Rue,50,6b18f24c-6f46-4784-bcb4-157c64e42f27,Chase,2023-12-09,0096795f-76af-443e-946f-a36871f5d987,ruetwoblue@gmail.com,2025-02-09
-Ryan,24,58a59e1c-8471-437e-8fbe-d50927a94b5e,Chase,2023-12-10,35775429-5a0d-4dff-99ee-8da0515a2ee0,ryanw@gmail.com,2024-03-10
-Ryan,26,b99afff5-b328-45c0-80d1-8150c7f1dc82,Chase,2023-12-10,ca8e11b6-a6e4-4332-b70c-f9b5b311ca40,ryan@gmail.net,2025-01-10
-Jake,19,2870910e-0df2-4056-915c-de7b410139e2,BMO,2023-12-10,c0e2398c-d950-4035-bd28-a4e4fec57797,jake@statefarm.com,2024-02-10
-Ryan,29,454965af-332c-4d94-b4e7-0f5b048fc792,PayPal,2023-12-10,b4904690-9619-4a4a-b7c5-a32d88f29aaf,random@gamil.com,2025-06-10
-Scrib,54,d20646fa-7869-4bc6-93cf-b1046c49ae1a,Chase,2023-12-10,bcaf22c7-67e5-47a4-a92e-5fddfa5353fe,scrib@gmail.com,2025-06-10
