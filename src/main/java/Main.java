@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -71,6 +72,7 @@ public class Main {
                     break;
                 case 3:
                     System.out.println("\nRenewing Member... \n");
+                    renewMember(scanner, database);
                     break;
                 case 4:
                     System.out.println("\nSigning up Member...\n");
@@ -78,6 +80,8 @@ public class Main {
                     break;
                 case 5:
                     System.out.println("\nFiltering Members...\n");
+                    DataFilters dataFilters = new DataFilters(database);
+                    dataFilters.thirtyDaysFilter();
                     break;
                 case 0:
                     System.out.println("\nExiting...\n");
@@ -114,16 +118,36 @@ public class Main {
 }
 
 private static void searchForMember(Scanner scanner, Database database) {
-  System.out.print("Enter the name of the member to search: ");
-  String name = scanner.nextLine();
-  Member foundMember = database.searchMemberByName(name);
-  if (foundMember != null) {
-      System.out.println("Member found: \n\n" + foundMember.toString());
-      promptForRenewal(scanner, database, foundMember);
-  } else {
-      System.out.println("No member found with the name: " + name);
-  }
+    System.out.print("Enter the name of the member to search: ");
+    String name = scanner.nextLine();
+    List<Member> foundMembers = database.searchMembersByName(name);
+
+    if (foundMembers.isEmpty()) {
+        System.out.println("No member found with the name: " + name);
+    } else if (foundMembers.size() == 1) {
+        Member exactMember = foundMembers.get(0);
+        System.out.println("Member found: \n" + exactMember.toString());
+        promptForRenewal(scanner, database, exactMember);
+    } else {
+        System.out.println("\nMultiple members found with the name: " + name);
+        for (Member member : foundMembers) {
+            System.out.println("\n" + member.toString());
+        }
+        Member exactMember = null;
+        while (exactMember == null) {
+            System.out.print("\nEnter the member ID to identify the exact member: ");
+            String memberId = scanner.nextLine();
+            exactMember = database.getMemberById(memberId);
+            if (exactMember == null) {
+                System.out.println("No member found with the ID: " + memberId + ". Please try again.");
+            }
+        }
+        System.out.println("\nMember found: \n" + exactMember.toString());
+        promptForRenewal(scanner, database, exactMember);
+    }
 }
+
+
 
 private static void promptForRenewal(Scanner scanner, Database database, Member member) {
   System.out.print("\nWould you like to renew " + member.getMemberName() + "'s membership? (yes/no): ");
@@ -134,6 +158,22 @@ private static void promptForRenewal(Scanner scanner, Database database, Member 
       database.updateMember(member); // Update member in database
       System.out.println("Membership renewed until: " + member.getExpirationDate() + "\n");
   }
+}
+
+private static void renewMember(Scanner scanner, Database database) {
+    System.out.print("Enter the member ID to renew: ");
+    String memberId = scanner.nextLine();
+    Member member = database.getMemberById(memberId);
+
+    if (member != null) {
+        System.out.println("\nMember found: \n" + member.toString());
+        MembershipRenewal renewal = new MembershipRenewal(member);
+        renewal.renewMembership(scanner);
+        database.updateMember(member); // Update member in database
+        System.out.println("Membership renewed until: " + member.getExpirationDate());
+    } else {
+        System.out.println("No member found with the ID: " + memberId);
+    }
 }
 
 }

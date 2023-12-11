@@ -3,26 +3,34 @@ import java.util.*;
 import java.time.temporal.ChronoUnit;
 
 public class DataFilters {
-
     Database database;
+    final String ANSI_RED = "\u001B[31m";
+    final String ANSI_RESET = "\u001B[0m";
+    final String ANSI_YELLOW = "\u001B[33m";
 
     public DataFilters(Database database) {
         this.database = database;
     }
 
-    public List<Member> ThirtyDaysFilter() {
-        List<Member> memberList = new ArrayList<>();
-        List<Member> entries = database.getMembers(); // Change the type to List<Member>
+    public List<Member> thirtyDaysFilter() {
+        List<Member> filteredMembers = new ArrayList<>();
+        List<Member> members = database.getMembers(); // Assuming getMembers returns List<Member>
         LocalDate today = LocalDate.now();
-        for (Member entry : entries) { // Change the type to Member
-            LocalDate lastLocalDateLogin = LocalDate.parse(entry.getLastSignIn());
 
-            long days = ChronoUnit.DAYS.between(lastLocalDateLogin, today);
+        for (Member member : members) {
+            LocalDate lastSignInDate = LocalDate.parse(member.getLastSignIn());
+            LocalDate expirationDate = LocalDate.parse(member.getExpirationDate());
+            long daysSinceLastSignIn = ChronoUnit.DAYS.between(lastSignInDate, today);
+            long daysUntilExpiration = ChronoUnit.DAYS.between(today, expirationDate);
 
-            if (days >= 30) {
-                memberList.add(entry);
+            if (daysSinceLastSignIn >= 30 || daysUntilExpiration < 30) {
+                String status = "";
+                if (daysSinceLastSignIn >= 30) status += " " + ANSI_YELLOW + "[Not Visited for 30+ Days]" + ANSI_RESET;
+                if (daysUntilExpiration < 30) status += " " + ANSI_RED + "[Membership Nearing End]" + ANSI_RESET;
+                System.out.println(member.toString() + status + "\n");
+                filteredMembers.add(member);
             }
         }
-        return memberList;
+        return filteredMembers;
     }
 }

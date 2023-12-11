@@ -11,7 +11,7 @@ public class MembershipRenewal {
     public void renewMembership(Scanner scanner) {
       int newMonths = 0;
       while (newMonths < 6 || newMonths > 36) {
-          System.out.println("Enter the number of months you would like to renew your subscription for (6 to 36 months): ");
+          System.out.println("\nEnter the number of months you would like to renew your subscription for (6 to 36 months): ");
           if (scanner.hasNextInt()) {
               newMonths = scanner.nextInt();
               if (newMonths < 6 || newMonths > 36) {

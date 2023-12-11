@@ -23,23 +23,46 @@ public class MemberSignUp
       
 
       boolean validated = false;
-      
       Scanner scan = new Scanner(System.in);
-      while(!validated)
-      {
-        
+
+      while (!validated) {
         System.out.println("Enter your name: ");
-        memberName = scan.next();
-        System.out.println("Enter your age: ");
-        memberAge = scan.nextInt();
+        memberName = scan.nextLine();
+
+        boolean validAge = false;
+        while (!validAge) {
+            System.out.println("Enter your age: ");
+            if (scan.hasNextInt()) {
+                memberAge = scan.nextInt();
+                validAge = true; // Age is valid
+            } else {
+                System.out.println("Invalid input. Please enter a valid integer for age.");
+                scan.next(); // Consume the invalid input
+            }
+        }
  
 
         System.out.println("Enter your payment method: ");
         paymentMethod = scan.next();
         System.out.println("Enter your email: ");
         memberEmail = scan.next();
-        System.out.println("Enter the number of months you would like to pay for your membership (from 6 to 36): ");
-        months = scan.nextInt(); 
+
+        boolean validMonths = false;
+        while (!validMonths) {
+            System.out.println("Enter the number of months you would like to pay for your membership (from 6 to 36): ");
+            if (scan.hasNextInt()) {
+                months = scan.nextInt();
+                if (months >= 6 && months <= 36) {
+                    validMonths = true; // Months input is valid
+                } else {
+                    System.out.println("Invalid input. Please enter a number between 6 and 36.");
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a valid integer number.");
+                scan.next(); // Consume the invalid input
+            }
+        }
+        
         validated = validateFields(memberName,memberAge,paymentMethod,memberEmail,months);
       }
       expirationDate = calculateEndDate(months);
