@@ -15,6 +15,7 @@ public class Database {
     }
 
     private void readMemberDatabase() {
+        //CHANGE FILEPATH TO "YOUR/LOCAL/PATH/.../50-sample...xlsx";
         String filePath = "C:/Users/Fireb/IdeaProjects/SEHealthClub/src/main/resources/50-sample-contacts-list-excel.xlsx";
 
         try (InputStream inputStream = new FileInputStream(filePath)) {
