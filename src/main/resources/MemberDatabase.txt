@@ -1,0 +1,4 @@
+Zarak,25,804cdf52-346c-4b5d-baaf-ca02137ef212,Chase,2023-12-04,de774f47-ff04-4e6e-9ecf-d77d45dcd7aa,zaraktariq@outlook.com,2023-07-04
+Ryan,21,b5a5d7c4-d4ec-45d0-a967-59232d7be1d5,BMO,2023-12-09,58cdffd1-fdfc-44ca-aa7c-b21fbabde943,ryanwal@gmail.com,2024-10-09
+Daniel,102,9269a884-29d5-4721-af8a-3f06fa05427e,Vbucks,2023-12-09,27da476b-0b59-43d6-a983-eaf59b87ac91,daniglw@gfmai.com,2026-04-09
+Rue,50,6b18f24c-6f46-4784-bcb4-157c64e42f27,Chase,2023-12-09,0096795f-76af-443e-946f-a36871f5d987,ruetwoblue@gmail.com,2025-02-09
