@@ -119,17 +119,18 @@ public Member getMemberById(String memberId) {
 }
 
     private void writeManagerCreds() {
-      try (BufferedWriter bw = new BufferedWriter(new FileWriter("resources\\ManagerCreds.txt"))) {
-          for (Manager manager : managers) {
-              String line = manager.getName() + "," + manager.getUsername() + "," + manager.getPassword() + ","
-                            + manager.getEmail() + "," + manager.getAuthenticationKey() + "," + manager.getEmployeeId();
-              bw.write(line);
-              bw.newLine();
-          }
-      } catch (IOException e) {
-          e.printStackTrace();
-      }
-  }
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(getResourceFilePath("ManagerCreds.txt")))) {
+            for (Manager manager : managers) {
+                String line = manager.getName() + "," + manager.getUsername() + "," + manager.getPassword() + ","
+                        + manager.getEmail() + "," + manager.getAuthenticationKey() + "," + manager.getEmployeeId();
+                bw.write(line);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void updateManagerCredentials(Manager updatedManager) {
       for (int i = 0; i < managers.size(); i++) {
