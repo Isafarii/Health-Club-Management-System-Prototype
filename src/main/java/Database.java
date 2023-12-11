@@ -14,7 +14,7 @@ public class Database {
   }
 
     private void readMemberDatabase() {
-    try (BufferedReader br = new BufferedReader(new FileReader("MemberDatabase.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(getResourceFilePath("MemberDatabase.txt")))) {
         String line;
         while ((line = br.readLine()) != null) {
             String[] parts = line.split(",");
@@ -24,10 +24,10 @@ public class Database {
                 members.add(member);
             }
         }//System.out.println("Total managers loaded: " + managers.size());
-    } catch (IOException | NumberFormatException e) {
-        e.printStackTrace();
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
     }
-}
 
 
     public List<Member> getMembers() {
@@ -47,7 +47,7 @@ public class Database {
     }
 
     private void readManagerCreds() {
-        try (BufferedReader br = new BufferedReader(new FileReader("ManagerCreds.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(getResourceFilePath("ManagerCreds.txt")))) {
             String line;
             while ((line = br.readLine()) != null) {
               //System.out.println("Reading line: " + line);
@@ -64,26 +64,27 @@ public class Database {
         }
     }
 
-    private void writeMemberDatabase() {
-  try (BufferedWriter bw = new BufferedWriter(new FileWriter("MemberDatabase.txt"))) {
-      for (Member member : members) {
-          String line = member.getMemberName() + "," +
-                        String.valueOf(member.getMemberAge()) + "," +
-                        member.getMemberId() + "," +
-                        member.getPaymentMethod() + "," +
-                        member.getLastSignIn() + "," +
-                        member.getQrCodeId() + "," +
-                        member.getMemberEmail() + "," +
-                        member.getExpirationDate();
-          bw.write(line);
-          bw.newLine();
-      }
-  } catch (IOException e) {
-      e.printStackTrace();
-  }
+private void writeMemberDatabase() {
+    try (BufferedWriter bw = new BufferedWriter(new FileWriter(getResourceFilePath("MemberDatabase.txt")))) {
+        for (Member member : members) {
+            String line = member.getMemberName() + "," +
+                    String.valueOf(member.getMemberAge()) + "," +
+                    member.getMemberId() + "," +
+                    member.getPaymentMethod() + "," +
+                    member.getLastSignIn() + "," +
+                    member.getQrCodeId() + "," +
+                    member.getMemberEmail() + "," +
+                    member.getExpirationDate();
+            bw.write(line);
+            bw.newLine();
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
 }
 
-public void updateMember(Member updatedMember) {
+
+    public void updateMember(Member updatedMember) {
   for (int i = 0; i < members.size(); i++) {
       if (members.get(i).getMemberId().equals(updatedMember.getMemberId())) {
           members.set(i, updatedMember); // Update the member's information
@@ -92,7 +93,11 @@ public void updateMember(Member updatedMember) {
   }
   writeMemberDatabase(); // Write the updated list back to the file
 }
-
+    private String getResourceFilePath(String fileName) {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource(fileName).getFile());
+        return file.getAbsolutePath();
+    }
 public List<Member> searchMembersByName(String name) {
     List<Member> matchingMembers = new ArrayList<>();
     for (Member member : members) {
@@ -114,7 +119,7 @@ public Member getMemberById(String memberId) {
 }
 
     private void writeManagerCreds() {
-      try (BufferedWriter bw = new BufferedWriter(new FileWriter("ManagerCreds.txt"))) {
+      try (BufferedWriter bw = new BufferedWriter(new FileWriter("resources\\ManagerCreds.txt"))) {
           for (Manager manager : managers) {
               String line = manager.getName() + "," + manager.getUsername() + "," + manager.getPassword() + ","
                             + manager.getEmail() + "," + manager.getAuthenticationKey() + "," + manager.getEmployeeId();
